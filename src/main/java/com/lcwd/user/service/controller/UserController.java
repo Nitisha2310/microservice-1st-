@@ -43,6 +43,6 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public ResponseEntity<ApiResponse> deleteUser(@PathVariable String userId) {
         userService.deleteUser(userId);
-        return ResponseEntity.ok(new ApiResponse("User not deleted successfully", true));
+        return ResponseEntity.ok(new ApiResponse("User no deleted successfully", true));
     }
 }
