@@ -1,9 +1,9 @@
 package com.lcwd.user.service.controller;
 
 import com.lcwd.user.service.entites.User;
-import com.lcwd.user.service.payload.ApiResponse;
 import com.lcwd.user.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,8 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        return ResponseEntity.ok(userService.saveUser(user));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(user));
     }
 
     @GetMapping("/{userId}")
@@ -38,11 +39,5 @@ public class UserController {
         existing.setEmail(user.getEmail());
         existing.setAbout(user.getAbout());
         return ResponseEntity.ok(userService.saveUser(existing));
-    }
-
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<ApiResponse> deleteUser(@PathVariable String userId) {
-        userService.deleteUser(userId);
-        return ResponseEntity.ok(new ApiResponse("User no deleted successfully", true));
     }
 }
